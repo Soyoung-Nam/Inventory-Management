@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>재고조회</title>
+</head>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<style>
+	.boardList	{ display: table; }
+	.divTableHeading { display: table-header-group;}
+	.divTableBody { display: table-row-group;}
+	.divTableRow { display: table-row; }
+	.divTableHead, .divTableCell { display: table-cell;}
+
+	h1 {
+		text-align: center;
+	}
+	.boardList {
+		margin: 0 auto;
+		width: 100%;
+		max-width: 1200px;
+		border-collapse: collapse;
+	}
+
+	.divTableHeading {
+		background-color: lightpink;
+	}
+
+	.divTableHead {
+		padding: 10px 10px;
+		width: 180px;
+		border: 1px solid gray;
+		text-align: center;
+	}
+
+	.divTableCell {
+		padding: 10px 10px;
+		width: 180px;
+		border: 1px solid gray;
+	}
+
+	#listBtnBox {
+		text-align: center;
+	}
+
+	#listInsertBtn {
+		margin-top: 20px;
+		padding: 5px;
+		cursor: pointer;
+
+	}
+
+	#tableList:hover {
+		cursor: pointer;
+		background-color: mistyrose;
+	}
+</style>
+
+<script>
+	function pageMove(subjectNo) {
+		console.log(subjectNo);
+
+    	var frm = document.createElement('form');
+    	var input;
+    	input = document.createElement('input');
+    	input.setAttribute('type', 'hidden');
+    	input.setAttribute('name', 'subjectNo');
+    	input.setAttribute('value', subjectNo);
+
+    	frm.appendChild(input);
+    	frm.setAttribute('method', 'post');
+    	frm.setAttribute('action', '/boardUpdate');
+    	document.body.appendChild(frm);
+    	frm.submit();
+	}
+
+	$(document).ready(function() {
+
+		//재고등록 페이지로 이동
+		$("#listInsertBtn").click(function() {
+			location.href = "/boardWrite";
+		});
+	});
+</script>
+
+<body>
+
+<h1>재고조회</h1>
+
+<div class="boardList">
+
+    <div class="divTableHeading">
+        <div class="divTableRow">
+            <div>
+                <div class="divTableHead">No</div>
+                <div class="divTableHead">품목번호</div>
+                <div class="divTableHead">품목</div>
+                <div class="divTableHead">구매일</div>
+                <div class="divTableHead">구매자</div>
+                <div class="divTableHead">등록일</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div id="tableList" th:each="l : ${list}" th:onclick="'javascript:pageMove('+ ${l.subjectNo} + ');'">
+                <div class="divTableCell" th:text="${l.no}"></div>
+                <div class="divTableCell" th:text="${l.subjectNo}"></div>
+                <div class="divTableCell" th:switch="${l.subject}">
+                    <span th:case="1">컴퓨터</span>
+                    <span th:case="2">모니터</span>
+                    <span th:case="3">키보드</span>
+                    <span th:case="4">마우스</span>
+                    <span th:case="5">VGA</span>
+                    <span th:case="6">스피커</span>
+                </div>
+                <div class="divTableCell" th:text="${l.buyDt}"></div>
+                <div class="divTableCell" th:text="${l.buyer}"></div>
+                <div class="divTableCell" th:text="${l.createDt}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="listBtnBox">
+        <input type="button" value="재고등록" id="listInsertBtn">
+    </div>
+</div>
+
+</body>
+</html>
