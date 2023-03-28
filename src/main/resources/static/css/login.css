@@ -1,0 +1,70 @@
+* {margin: 0; padding: 0; border: none;}
+
+.wrapper {
+    background: #C9D6FF;
+    background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
+    background: linear-gradient(to right, #E2E2E2, #C9D6FF);
+}
+
+.login-wrapper {
+    position: absolute;
+    width: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#login-form > input {
+    width: 100%;
+    height: 50px;
+    padding: 7px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #F8F8F8;
+}
+
+#login-form > input::placeholder {
+    color: #D2D2D2;
+}
+
+#login-form > input[type="submit"] {
+    margin: 20px 0px;
+    color: #FFF;
+    background-color: #505050;
+    cursor: pointer;
+}
+
+.a-tag {
+    text-align: center;
+    margin-bottom: 7px;
+}
+
+.line {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.line:after {
+    display: inline-block;
+    width: 40%;
+    height: 1px;
+    margin: 0 0 3px 20px;
+    content: "";
+    text-shadow: none;
+    background-color: #999;
+}
+
+.line:before {
+    display: inline-block;
+    width: 40%;
+    height: 1px;
+    margin: 0 20px 3px 0;
+    content: "";
+    text-shadow: none;
+    background-color: #999;
+}
+
+.sns-login > p {
+    text-align: center;
+}
