@@ -1,4 +1,4 @@
-package practice.practicespring.configuration;
+package com.practice.configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -36,7 +36,7 @@ public class DBConfiguration {
     public SqlSessionFactory sqlSessionFactory() throws Exception { //데이터소스를 참조하며 XML Mapper 경로와 설정파일 경로 등의 정보를 갖는 객체
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource());
-		//factoryBean.setMapperLocations(context.getResources("classpath:/mappers/**/*Mapper.xml"));
+		factoryBean.setMapperLocations(context.getResources("classpath:/mappers/**/*.xml"));
         return factoryBean.getObject();
     }
 
@@ -44,5 +44,4 @@ public class DBConfiguration {
     public SqlSessionTemplate sqlSession() throws Exception { //SqlSessionFactory를 통해 생성되고 DB의 커밋 및 롤백 등..
         return new SqlSessionTemplate(sqlSessionFactory());
     }
-
 }
