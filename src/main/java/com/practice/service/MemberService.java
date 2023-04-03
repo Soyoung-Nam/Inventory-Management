@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface MemberService {
 
-    public List<MemberDTO> selectMemberList();
+    //로그인
+    public MemberDTO memberLogin(MemberDTO dto);
 }

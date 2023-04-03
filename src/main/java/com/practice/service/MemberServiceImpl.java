@@ -7,7 +7,7 @@ import com.practice.domain.MemberDTO;
 
 import java.util.List;
 
-@Service //데이터 비즈니스 로직
+@Service //데이터 비즈니스 로직, 구현체
 public class MemberServiceImpl implements MemberService {
 
     private MemberMapper memberMapper;
@@ -17,7 +17,8 @@ public class MemberServiceImpl implements MemberService {
         this.memberMapper = memberMapper;
     }
 
-    public List<MemberDTO> selectMemberList() {
-        return memberMapper.selectMemberList();
+    //로그인
+    public MemberDTO memberLogin(MemberDTO dto) {
+        return memberMapper.memberLogin(dto);
     }
 }

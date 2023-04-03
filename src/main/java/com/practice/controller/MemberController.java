@@ -15,7 +15,7 @@ public class MemberController {
 
     private MemberService memberService;
 
-    @Autowired
+    @Autowired //연결
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
@@ -24,10 +24,18 @@ public class MemberController {
     public String loginAction(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");
+        String error = "";
 
-        List<MemberDTO> list = memberService.selectMemberList();
-        System.out.println(list.toString());
+        MemberDTO dto = new MemberDTO();
+        dto.setId(id);
+        dto.setPw(pw);
 
-        return "/login/login";
+        MemberDTO result = memberService.memberLogin(dto);
+
+        if(result != null) {
+            return "/index";
+        } else {
+            return "/login/login";
+        }
     }
 }
