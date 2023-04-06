@@ -1,19 +1,48 @@
 package com.practice.domain;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
+@Data
+@Getter
+@Setter
 public class MemberDTO {
-    private int no;
-    private String id;
-    private String name;
-    private String pw;
-    private String email;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthDate;
-    private Date joinDate;
-    private int grade;
 
+    /* 회원번호 */
+    private int no;
+
+    /* 아이디 */
+    @NotBlank(message = "아이디를 입력해주세요.") //유효성 검사를 실행할 변수
+    private String id;
+
+    /* 이름 */
+    @NotBlank(message = "이름을 입력해주세요.")
+    private String name;
+
+    /* 비밀번호 */
+    @NotBlank(message = "비밀번호를 입력해주세요.")
+    private String pw;
+
+    /* 이메일 */
+    @NotBlank(message = "이메일을 입력해주세요.")
+    private String email;
+
+    /* 생년월일 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String birthDate;
+
+    /* 회원가입년도 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date joinDate;
+
+    /* 핸드폰번호 */
+    private String phone;
+
+    /* getter setter - lombok */
     public int getNo() {
         return no;
     }
@@ -54,11 +83,11 @@ public class MemberDTO {
         this.email = email;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -70,13 +99,15 @@ public class MemberDTO {
         this.joinDate = joinDate;
     }
 
-    public int getGrade() {
-        return grade;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
+
+    /* console에 DTO값 전체출력하기 */
 
     @Override
     public String toString() {
@@ -86,9 +117,9 @@ public class MemberDTO {
                 ", name='" + name + '\'' +
                 ", pw='" + pw + '\'' +
                 ", email='" + email + '\'' +
-                ", birthDate=" + birthDate +
+                ", birthDate='" + birthDate + '\'' +
                 ", joinDate=" + joinDate +
-                ", grade=" + grade +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }

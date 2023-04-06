@@ -11,14 +11,39 @@
         email,
         birthDate,
         joinDate,
-        grade
+        phone
     </sql>
 
-    <!-- 로그인 -->
-    <select id="memberLogin" parameterType="com.practice.domain.MemberDTO" resultType="com.practice.domain.MemberDTO">
+    <!-- Member 테이블 가져오기 -->
+    <select id="getMemberList" resultType="com.practice.domain.MemberDTO">
         SELECT * FROM login
-        WHERE id = #{id}
-        AND pw = #{pw}
     </select>
+
+    <!-- 회원정보 가져오기 -->
+    <select id="getMemberByNo" resultType="com.practice.domain.MemberDTO">
+        SELECT *
+        FROM login
+        WHERE no = #{no}
+    </select>
+
+    <select id="getMemberById" resultType="com.practice.domain.MemberDTO">
+        SELECT *
+        FROM login
+        WHERE id = #{id}
+    </select>
+
+    <select id="getMemberByIdName" resultType="com.practice.domain.MemberDTO">
+        SELECT id, name
+        FROM login
+        WHERE no = #{no}
+    </select>
+
+    <!-- 회원가입 -->
+    <insert id="insertMember">
+        INSERT INTO login
+        (id, name, pw, email, birthDate, phone)
+        VALUES
+        (#{id}, #{name}, #{pw}, #{email}, #{birthDate}, #{phone})
+    </insert>
 
 </mapper>

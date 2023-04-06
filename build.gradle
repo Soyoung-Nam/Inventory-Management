@@ -13,12 +13,15 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' //view템플릿 타임리프
+	implementation 'org.springframework.boot:spring-boot-starter-web' //web
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client' //DB mariadb , JDBC DB연결
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2' //myBatis SQL맵핑
+	implementation 'org.projectlombok:lombok' //lombok @getter @setter
+	implementation 'org.springframework.boot:spring-boot-starter-security' //시큐리티
+	implementation 'org.springframework.boot:spring-boot-starter-validation' //유효성 검사
+	developmentOnly 'org.springframework.boot:spring-boot-devtools' //서버 끄지 않고 변경 사항 반영
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' //test
 }
 
 tasks.named('test') {

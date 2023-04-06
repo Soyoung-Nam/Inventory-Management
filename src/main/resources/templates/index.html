@@ -3,9 +3,19 @@
 <head th:replace="fragments/meta :: meta"></head>
 <header th:replace="fragments/header :: header"></header>
 
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+    });
+</script>
+
 <body>
 
 <p>index페이지 입니다.</p>
+<p th:text="${dto.id}"></p>
+<p th:text="${dto.name}"></p>
+
 <footer th:replace="fragments/footer :: footer"></footer>
 
 </body>

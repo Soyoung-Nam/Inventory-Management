@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/") //index페이지 login페이지로 변경
-    public String indexPage() {
-        return "login/login";
+    //기본페이지(index파일로 자동 연결), 기본페이지를 login페이지로 변경
+    @GetMapping("/")
+    public String loginPage() {
+        return "/login/login";
     }
 }
