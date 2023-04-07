@@ -41,8 +41,8 @@ public class MemberServiceImpl implements MemberService {
 
     //회원가입
     public void insertMember(MemberDTO memberDTO) {
-        if (!memberDTO.getId().equals("") && !memberDTO.getName().equals("")) {
-            //password는 암호화해서 DB에 저장
+        if (memberDTO != null) {
+            //비밀번호는 암호화해서 DB에 저장한다.
             memberDTO.setPw(passwordEncoder.encode(memberDTO.getPw()));
             memberMapper.insertMember(memberDTO);
         }

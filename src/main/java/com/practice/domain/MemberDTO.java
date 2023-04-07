@@ -1,5 +1,4 @@
 package com.practice.domain;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -7,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
-@Data
 @Getter
 @Setter
 public class MemberDTO {
@@ -40,6 +38,7 @@ public class MemberDTO {
     private Date joinDate;
 
     /* 핸드폰번호 */
+    @NotBlank(message = "핸드폰번호를 입력해주세요.")
     private String phone;
 
     /* getter setter - lombok */

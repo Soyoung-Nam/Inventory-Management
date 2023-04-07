@@ -7,9 +7,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 public class MemberController {
@@ -30,34 +32,39 @@ public class MemberController {
         return "/index";
     }
 
-    //회원가입 페이지
-    @GetMapping("/login/join")
-    public String joinPage() {
+    //회원가입 Page
+    @GetMapping("/join")
+    public String joinPage(Model model) {
+        model.addAttribute("member", new MemberDTO());
         return "/login/join";
     }
 
     //회원가입 Action
     @PostMapping("/join")
-    public String joinAction(HttpServletRequest request, MemberDTO memberDTO) {
-        String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String pw = request.getParameter("pw");
-        String email = request.getParameter("email");
-        String birthDate = request.getParameter("birthDate");
-        String phone = request.getParameter("phone");
+    public String joinAction(@ModelAttribute("member") @Valid MemberDTO memberDTO, BindingResult bindingResult, HttpServletRequest request) {
+        //System.out.println(memberDTO.toString());
 
-        MemberDTO dto = new MemberDTO();
-        dto.setId(id);
-        dto.setName(name);
-        dto.setPw(pw);
-        dto.setEmail(email);
-        dto.setBirthDate(birthDate);
-        dto.setPhone(phone);
+        if(bindingResult.hasErrors()) {
+            return "/login/join";
+        }
 
-        System.out.println(memberDTO.toString());
+        if(!bindingResult.hasErrors()) {
+            memberService.insertMember(memberDTO);
+            return "/login/login";
+        }
+        return "/login/join";
+    }
 
-        memberService.insertMember(memberDTO);
-        return "/login/login";
+    //아이디찾기 페이지
+    @GetMapping("/findId")
+    public String findIdPage() {
+        return "/login/findId";
+    }
+
+    //비밀번호찾기 페이지
+    @GetMapping("/findPw")
+    public String findPwPage() {
+        return "/login/findPw";
     }
 
 }

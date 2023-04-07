@@ -1,7 +1,6 @@
 package com.practice.service;
 
 import com.practice.domain.MemberDTO;
-
 import java.util.List;
 
 public interface MemberService {
@@ -17,6 +16,6 @@ public interface MemberService {
     MemberDTO getMemberByIdName(int no);
 
     //회원가입
-    void insertMember(MemberDTO memberDTO);
+     void insertMember(MemberDTO memberDTO);
 
 }

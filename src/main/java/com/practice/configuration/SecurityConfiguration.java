@@ -17,7 +17,7 @@ public class SecurityConfiguration {
         http
                 .csrf().disable() //csrf : 사용자가 자신의 의지와는 무관하게 공격자가 의도한 행위를 특정 웹사이트에 요청하게하는 공격을 말한다.
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/login/join", "/join", "/css/**", "/img/**").permitAll() //() 페이지는 허용
+                        .antMatchers("/", "/join", "/findId", "/findPw", "/css/**", "/img/**").permitAll() //() 페이지는 허용
                         .anyRequest().authenticated() //이 외의 다른 페이지는 인증된(로그인한) 사용자만 허용
                 )
 
