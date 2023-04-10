@@ -14,28 +14,10 @@
         phone
     </sql>
 
-    <!-- Member 테이블 가져오기 -->
-    <select id="getMemberList" resultType="com.practice.domain.MemberDTO">
-        SELECT * FROM login
-    </select>
-
-    <!-- 회원정보 가져오기 -->
-    <select id="getMemberByNo" resultType="com.practice.domain.MemberDTO">
-        SELECT *
-        FROM login
-        WHERE no = #{no}
-    </select>
-
-    <select id="getMemberById" resultType="com.practice.domain.MemberDTO">
+    <select id="getMemberById" resultType="com.practice.auth.CustomUserDetails">
         SELECT *
         FROM login
         WHERE id = #{id}
-    </select>
-
-    <select id="getMemberByIdName" resultType="com.practice.domain.MemberDTO">
-        SELECT id, name
-        FROM login
-        WHERE no = #{no}
     </select>
 
     <!-- 회원가입 -->

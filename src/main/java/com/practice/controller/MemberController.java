@@ -1,5 +1,6 @@
 package com.practice.controller;
 
+import com.practice.auth.CustomUserDetails;
 import com.practice.domain.MemberDTO;
 import com.practice.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +17,22 @@ import javax.validation.Valid;
 @Controller
 public class MemberController {
 
-    private MemberService memberService;
-
     @Autowired
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    private MemberService memberService;
 
     @GetMapping("/index")
     public String indexPage(Model model) { //인증된 사용자의 정보를 보여준다.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //token에 저장되어 있는 인증된 사용자의 값
-        int no = Integer.parseInt(authentication.getName());
-        MemberDTO dto = memberService.getMemberByIdName(no);
-        model.addAttribute("dto", dto);
+        String id = authentication.getName();
+        CustomUserDetails customUserDetails = memberService.getMemberById(id);
+        model.addAttribute("cud", customUserDetails);
         return "/index";
     }
 
     //회원가입 Page
     @GetMapping("/join")
     public String joinPage(Model model) {
-        model.addAttribute("member", new MemberDTO());
+        model.addAttribute("member", new MemberDTO()); //빈 오브젝트 보낸다.
         return "/login/join";
     }
 

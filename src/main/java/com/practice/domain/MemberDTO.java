@@ -41,6 +41,8 @@ public class MemberDTO {
     @NotBlank(message = "핸드폰번호를 입력해주세요.")
     private String phone;
 
+    private String role;
+
     /* getter setter - lombok */
     public int getNo() {
         return no;
@@ -106,6 +108,14 @@ public class MemberDTO {
         this.phone = phone;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     /* console에 DTO값 전체출력하기 */
 
     @Override
@@ -119,6 +129,7 @@ public class MemberDTO {
                 ", birthDate='" + birthDate + '\'' +
                 ", joinDate=" + joinDate +
                 ", phone='" + phone + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
