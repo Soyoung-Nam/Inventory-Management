@@ -38,7 +38,7 @@ public class AuthProvider implements AuthenticationProvider {
                 //Exception을 던지지 않고 다른 값을 반환하면 authenticate() 메서드는 정상적으로 실행된 것이므로 인증되지 않았다면 Exception을 throw 해야 한다.
         }
 
-        //AuthenticationProvider 표시된 Authentication 객체를 지원하는지 여부를 반환한다.
+        //AuthenticationProvider 표시된 Authentication 객체를 지원하는지 여부를 반환한다.. 이해는 잘 안간다..
         @Override
         public boolean supports(Class<?> authentication) {
             return true;

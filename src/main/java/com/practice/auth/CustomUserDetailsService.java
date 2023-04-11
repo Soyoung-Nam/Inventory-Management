@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-///// DB에서 유저 정보를 가져오는 역할 /////
+///// DB에서 유저 정보를 가져오는 인터페이스 /////
 //loadUserByUsername() 메소드에서 CustomUserDetails으로 사용자정보를 받아오면 된다.
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

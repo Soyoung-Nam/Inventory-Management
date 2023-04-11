@@ -2,24 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>로그인</title>
     <link th:href="@{/css/login/login.css}" rel="stylesheet" />
 </head>
-
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <body>
 
     <div class="wrapper">
         <div class="login-wrapper">
-            <form action="/login" method="post" id="login-form">
+            <form id="login-form"> <!-- form이 name값으로 넘어가기 때문에 name값 중요! -->
                 <input type="text" name="id" id="id" placeholder="아이디를 입력하세요.">
                 <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력하세요.">
                 <label for="remember-check">
                     <input type="checkbox" name="rememberCheck" id="remember-check"> 아이디저장
                 </label>
-                <div th:if="${error}">
+                <p id="noId" style="display: none;">아이디를 입력해주세요.</p>
+                <p id="noPw" style="display: none;">비밀번호를 입력해주세요.</p>
+                <div th:if="${error}"> <!-- error가 true면 -->
                     <p style="color: red; font-size: 12px;" th:text="${exception}"></p>
                 </div>
-                <input type="submit" value="로그인">
+                <input type="button" onclick="loginCheck()" value="로그인">
             </form>
             <div class="a-tag">
                 <a href="/join">&nbsp; 회원가입 &nbsp;<span>|</span></a>
@@ -38,4 +40,44 @@
     </div>
 
 </body>
+<!-- 자바스크립트 위치 중요! -->
+<script>
+    function loginCheck() {
+        var id = document.getElementById("id");
+        var pw = document.getElementById("pw");
+        var noId = document.getElementById("noId");
+        var noPw = document.getElementById("noPw");
+        var form = document.getElementById("login-form");
+        let isValid = true;
+
+        if(id.value == "" && pw.value != "") {
+            noId.style.display = 'block';
+            noPw.style.display = 'none';
+            id.focus();
+            return false;
+        }
+
+        if(id.value == "" || id.value == null) {
+            noId.style.display = 'block';
+            id.focus();
+            return false;
+        } else {
+            noId.style.display = 'none';
+        }
+
+         if(pw.value == "" || pw.value == null) {
+            noPw.style.display = 'block';
+            pw.focus();
+            return false;
+        } else {
+            noPw.style.display = 'none';
+        }
+
+        if(isValid) {
+            form.action = '/login';
+            form.method = 'POST';
+            form.submit();
+        }
+    }
+</script>
 </html>

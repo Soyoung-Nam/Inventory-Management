@@ -1,5 +1,6 @@
 package com.practice.controller;
 
+import com.practice.auth.CustomUserDetails;
 import com.practice.domain.MemberDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

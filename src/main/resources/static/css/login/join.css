@@ -37,6 +37,11 @@
     overflow: scroll;
 }
 
+/* 스크롤은 있지만 스크롤 없애기 */
+.join-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
 #join-form > input {
     width: 100%;
     height: 40px;

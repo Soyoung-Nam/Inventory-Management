@@ -1,0 +1,48 @@
+.boardList	{ display: table; }
+.divTableHeading { display: table-header-group;}
+.divTableBody { display: table-row-group;}
+.divTableRow { display: table-row; }
+.divTableHead, .divTableCell { display: table-cell;}
+
+h1 {
+	text-align: center;
+}
+
+.boardList {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1200px;
+	border-collapse: collapse;
+}
+
+.divTableHeading {
+	background-color: lightpink;
+}
+
+.divTableHead {
+	padding: 10px 10px;
+	width: 180px;
+	border: 1px solid gray;
+	text-align: center;
+}
+
+.divTableCell {
+	padding: 10px 10px;
+	width: 180px;
+	border: 1px solid gray;
+}
+
+#listBtnBox {
+	text-align: center;
+}
+
+#listInsertBtn {
+	margin-top: 20px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+#tableList:hover {
+	cursor: pointer;
+	background-color: mistyrose;
+}

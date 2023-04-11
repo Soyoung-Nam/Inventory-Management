@@ -4,6 +4,8 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Getter
@@ -23,6 +25,7 @@ public class MemberDTO {
 
     /* 비밀번호 */
     @NotBlank(message = "비밀번호를 입력해주세요.")
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호는 8~16자 숫자, 영문 대소문자, 특수문자를 사용하세요.")
     private String pw;
 
     /* 이메일 */
@@ -34,13 +37,14 @@ public class MemberDTO {
     private String birthDate;
 
     /* 회원가입년도 */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date joinDate;
 
     /* 핸드폰번호 */
     @NotBlank(message = "핸드폰번호를 입력해주세요.")
+    @Pattern(regexp = "(?=.*[0-9]).{0,11}", message = "휴대번호는 숫자만 입력하세요.")
     private String phone;
 
+    /* 권한 */
     private String role;
 
     /* getter setter - lombok */

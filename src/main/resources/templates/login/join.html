@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>join</title>
+    <title>회원가입</title>
     <link th:href="@{/css/login/join.css}" rel="stylesheet" />
 </head>
 <body>
@@ -13,30 +13,31 @@
             <p>*필수항목</p>
             <form method="post" action="/join" th:object="${member}" id="join-form">
                 <label for="id">*아이디</label>
-                <input type="text" th:field="*{id}" id="id">
+                <input type="text" th:field="*{id}" id="id" th:value="#{dto.id}">
                 <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="errorMsg"></p>
 
                 <label for="pw">*비밀번호</label>
-                <input type="password" th:field="*{pw}" id="pw">
+                <input type="password" th:field="*{pw}" id="pw" th:value="#{dto.pw}">
                 <p th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" class="errorMsg"></p>
 
                 <label for="name">*이름</label>
-                <input type="text" th:field="*{name}" id="name">
+                <input type="text" th:field="*{name}" id="name" th:value="#{dto.name}">
                 <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="errorMsg"></p>
 
                 <label for="email">*Email</label>
-                <input type="email" th:field="*{email}" id="email">
+                <input type="email" th:field="*{email}" id="email" th:value="#{dto.email}">
                 <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="errorMsg"></p>
 
                 <label for="birthDate">생년월일</label>
-                <input type="date" th:field="*{birthDate}" id="birthDate">
+                <input type="date" th:field="*{birthDate}" id="birthDate" th:value="#{dto.birthDate}">
+                <p th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="errorMsg"></p>
 
                 <label for="phone">*휴대전화</label>
-                <input type="tel" th:field="*{phone}" id="phone">
+                <input type="tel" th:field="*{phone}" id="phone" th:value="#{dto.phone}">
                 <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="errorMsg"></p>
 
                 <input type="submit" value="가입하기">
-                <a href="javascript:history.back()">뒤로가기</a>
+                <a href="/login/login">뒤로가기</a>
             </form>
         </div>
     </div>

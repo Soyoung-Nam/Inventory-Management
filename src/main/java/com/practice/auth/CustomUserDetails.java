@@ -8,19 +8,27 @@ import java.util.Collection;
 
 ///// 스프링 시큐리티에서 사용자의 정보를 담는 인터페이스 /////
 //form의 Username(Id)와 Password 정보가 담긴 Authentication 객체를 생성하여 AuthenticationManager에 넘긴다.
-//AuthenticationManager : 인증을 체크하는 역할
 //Spring Security > Authentication 객체 > UserDetails 객체
 @Data //@Getter, @Setter, @ToString, @RequiredArgsConstructor, @EqualsAndHashCode 어노테이션을 한꺼번에 설정해주는 어노테이션
 public class CustomUserDetails implements UserDetails {
 
+    /* 회원번호 */
     private int no;
+    /* 아이디 */
     private String id;
+    /* 이름 */
     private String name;
+    /* 비밀번호 */
     private String pw;
+    /* 이메일 */
     private String email;
+    /* 생년월일 */
     private String birthDate;
+    /* 회원가입년도 */
     private Date joinDate;
+    /* 핸드폰번호 */
     private String phone;
+    /* 권한 */
     private String role;
 
     /* 권한 */
