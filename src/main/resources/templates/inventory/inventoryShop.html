@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>재고구매</title>
+    <link th:href="@{/css/inventory/inventoryShop.css}" rel="stylesheet" />
 </head>
 
 <header th:replace="fragments/header :: header"></header>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
     $(document).ready(function() {
 
@@ -17,7 +17,11 @@
 
 <body>
 
-<p>재고구매페이지 입니다.</p>
+<div class="wrapper">
+    <div class="shop-wrapper">
+        <p>재고구매페이지 입니다.</p>
+    </div>
+</div>
 
 <footer th:replace="fragments/footer :: footer"></footer>
 

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 //수동으로 스프링컨테이너에 빈을 등록하기 위해서 @Configuration을 클래스에 붙여주고 @Bean으로 등록한다. 메소드 이름으로 Bean 이름이 결정된다.

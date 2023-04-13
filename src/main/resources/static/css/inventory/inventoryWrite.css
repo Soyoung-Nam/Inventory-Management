@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.wrapper {
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 50px;
+  background: #F9F7F7;
+}
+
+#boardWrite {
+    margin: 0 auto;
+	padding: 0;
+	padding-top: 20px;
+	width: 600px;
+	height: 600px;
+}
+
+h1 {
+    text-align: center;
+    color: #112D4E;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+table {
+    margin: 0 auto;
+	padding: 0;
+	width: 500px;
+	height: 350px;
+	border: 1px solid #D2D2D2;
+	border-top: 2px solid #112D4E;
+	border-collapse: collapse;
+	background: #FFF;
+}
+
+th {
+	border: 1px solid #D2D2D2;
+}
+
+tr {
+	border: 1px solid #D2D2D2;
+	text-align: center;
+}
+
+#writeBtnBox {
+	text-align: center;
+	margin-top: 15px;
+}
+
+#writeInsertBtn {
+    padding: 15px 30px;
+    margin-right: 5px;
+    background: #DBE2EF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#cancelBtn {
+    padding: 15px 30px;
+    margin-left: 5px;
+    background: #DBE2EF;
+    border-radius: 5px;
+    cursor: pointer;
+}

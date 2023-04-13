@@ -3,15 +3,33 @@
 
 <header th:fragment="header">
     <link th:href="@{/css/fragments/header.css}" rel="stylesheet" />
-
     <div class="header-wrapper">
         <div class="left-items"><a href="/index">홈</a></div>
         <div class="left-items"><a href="/inventoryList">재고관리</a></div>
         <div class="left-items"><a href="/inventoryShop">재고구매</a></div>
         <div class="left-items"><a href="/boardList">게시판</a></div>
-        <div class="right-items"><p id="myInfo">내 정보</p></div>
+        <div class="right-items">
+            <a href="">내 정보</a>
+            <ul id="myInfo">
+                <li><a href="">작성한 게시글</a></li>
+                <li><a href="">구매내역</a></li>
+                <li><a href="/logout">로그아웃</a></li>
+            </ul>
+        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
 
+            $(".right-items>a").mouseover(function() {
+                $("#myInfo").slideDown();
+            });
+
+            $("#myInfo").mouseleave(function() {
+                $(this).slideUp();
+            });
+        });
+    </script>
 </header>
 
 </html>

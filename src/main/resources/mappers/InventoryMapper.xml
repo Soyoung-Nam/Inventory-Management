@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.practice.mapper.InventoryMapper">
+
+    <sql id="InventoryColumns">
+        no,
+        subjectNo,
+        subject,
+        buyer,
+        buyDt,
+        amount,
+        createDt,
+        updateDt,
+        delFlag
+    </sql>
+
+    <!-- 재고목록 가져오기 -->
+    <select id="selectInventoryList" resultType="com.practice.domain.InventoryDTO">
+        SELECT * FROM inventory
+    </select>
+
+    <!-- 상세재고목록 가져오기 -->
+    <select id="getInventoryListBySubjectNo" resultType="com.practice.domain.InventoryDTO">
+        SELECT * FROM inventory
+        WHERE subjectNo = #{subjectNo}
+    </select>
+
+    <!-- 재고 등록하기 -->
+    <insert id="insertInventory">
+        INSERT INTO inventory
+        (no, subject, buyer, buyDt, amount, delFlag)
+        VALUES
+        (#{no}, #{subject}, #{buyer}, #{buyDt}, #{amount}, 1)
+    </insert>
+
+</mapper>

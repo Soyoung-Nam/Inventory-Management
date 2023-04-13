@@ -11,6 +11,10 @@ ul {
     list-style: none;
 }
 
+li {
+    list-style: none;
+}
+
 a {
     text-decoration: none;
     color: #282828;
@@ -34,12 +38,31 @@ a {
 }
 
 .right-items {
-    height: 100%;
+    width: 200px;
+    height: 30px;
     margin-left: auto;
     margin-right: 100px;
     text-align: center;
-}
-
-.right-items > p {
     cursor: pointer;
 }
+
+.right-items > a {
+    margin-bottom: 10px;
+}
+
+.right-items ul {
+    display: none;
+    padding: 10px;
+    text-align: center;
+    background: #FFF;
+    position : relative; /* 맨 앞으로 가져오기 */
+    z-index: 999; /* 맨 앞으로 가져오기 */
+}
+
+.right-items ul li {
+    margin-bottom: 10px;
+}
+
+
+
+
