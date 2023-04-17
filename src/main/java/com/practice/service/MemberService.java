@@ -10,4 +10,6 @@ public interface MemberService {
     //회원가입
      void insertMember(MemberDTO memberDTO);
 
+    //회원가입 아이디 중복체크
+    int idCheck(String id);
 }

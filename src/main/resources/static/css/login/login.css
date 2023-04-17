@@ -10,9 +10,9 @@
 .wrapper {
     width: 100vw;
     height: 100vh;
-    background: #C9D6FF;
-    background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
-    background: linear-gradient(to right, #E2E2E2, #C9D6FF);
+    background: #DAD299;
+    background: -webkit-linear-gradient(to right, #B0DAB9, #DAD299);
+    background: linear-gradient(to right, #B0DAB9, #DAD299);
 }
 
 .login-wrapper {

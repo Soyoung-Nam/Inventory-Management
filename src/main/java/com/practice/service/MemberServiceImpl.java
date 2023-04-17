@@ -31,4 +31,9 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    //회원가입 아이디 중복체크
+    @Override
+    public int idCheck(String id) {
+        return memberMapper.idCheck(id);
+    }
 }

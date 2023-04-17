@@ -41,12 +41,26 @@ public class MemberController {
     public String joinAction(@ModelAttribute("member") @Valid MemberDTO memberDTO, BindingResult bindingResult, HttpServletRequest request, Model model) {
         //System.out.println(memberDTO.toString());
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("dto", memberDTO);
             return "/login/join";
         } else {
             memberService.insertMember(memberDTO);
             return "/login/login";
+        }
+    }
+
+    //회원가입 아이디 중복체크 Ajax
+    @PostMapping("/idCheckAjax")
+    @ResponseBody
+    public int idCheckAction(HttpServletRequest request) {
+        String id = request.getParameter("id");
+
+        if(id == "" || id == null) {
+            return -1;
+        } else {
+            int result = memberService.idCheck(id);
+            return result;
         }
     }
 

@@ -10,17 +10,18 @@
 .wrapper {
     width: 100vw;
     height: 100vh;
-    background: #C9D6FF;
-    background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
-    background: linear-gradient(to right, #E2E2E2, #C9D6FF);
-}
-
-.join-wrapper > p {
-    text-align: right;
+    background: #DAD299;
+    background: -webkit-linear-gradient(to right, #B0DAB9, #DAD299);
+    background: linear-gradient(to right, #B0DAB9, #DAD299);
 }
 
 .join-wrapper > h1 {
     text-align : center;
+    margin-bottom: 10px;
+}
+
+.join-wrapper > p {
+    text-align: right;
     margin-bottom: 10px;
 }
 
@@ -37,7 +38,7 @@
     overflow: scroll;
 }
 
-/* 스크롤은 있지만 스크롤 없애기 */
+/* 스크롤은 있지만 스크롤 모양 없애기 */
 .join-wrapper::-webkit-scrollbar {
     display: none;
 }
@@ -51,7 +52,7 @@
     background-color: #F8F8F8;
 }
 
-#join-form > input[type="submit"] {
+#join-form > input[type="button"] {
     margin: 20px 0px;
     height: 50px;
     color: #FFF;
@@ -64,7 +65,14 @@
 }
 
 .errorMsg {
-    margin-bottom: 5px;
-    padding: 5px;
     color: red;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.checkIdMsg {
+    display: none;
+    color: red;
+    font-size: 12px;
+    margin-bottom: 3px;
 }

@@ -10,7 +10,7 @@
 
     <div class="wrapper">
         <div class="login-wrapper">
-            <form id="login-form"> <!-- form이 name값으로 넘어가기 때문에 name값 중요! -->
+            <form id="login-form"> <!-- form은 name값으로 넘어간다. -->
                 <input type="text" name="id" id="id" placeholder="아이디를 입력하세요.">
                 <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력하세요.">
                 <label for="remember-check">
@@ -40,7 +40,7 @@
     </div>
 
 </body>
-<!-- 자바스크립트 위치 중요! -->
+<!-- 자바스크립트 위치 중요하다. -->
 <script>
     function loginCheck() {
         var id = document.getElementById("id");
