@@ -8,9 +8,7 @@
 }
 
 .wrapper {
-  height: auto;
-  min-height: 100%;
-  padding-bottom: 50px;
+  min-height: calc(100vh - 5rem);
   background: #F9F7F7;
 }
 
@@ -49,7 +47,8 @@ h1 {
 .divTableCell {
 	padding: 10px 10px;
 	width: 180px;
-	border: 1px solid gray;
+	border: 1px solid #D2D2D2;
+	background: #FFF;
 }
 
 #listBtnBox {
@@ -66,5 +65,4 @@ h1 {
 
 #tableList:hover {
 	cursor: pointer;
-	background-color: #F8F8F8;
 }

@@ -8,8 +8,6 @@
 }
 
 .footer {
-    height: 50px;
+    height: 5rem;
     background: #969696;
-    position : relative;
-    transform : translateY(-100%);
 }

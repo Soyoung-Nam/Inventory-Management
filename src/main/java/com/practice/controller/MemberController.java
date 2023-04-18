@@ -39,7 +39,6 @@ public class MemberController {
     //회원가입 Action
     @PostMapping("/join")
     public String joinAction(@ModelAttribute("member") @Valid MemberDTO memberDTO, BindingResult bindingResult, HttpServletRequest request, Model model) {
-        //System.out.println(memberDTO.toString());
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("dto", memberDTO);

@@ -17,7 +17,6 @@
                 <input type="text" th:field="*{id}" id="id" th:value="#{dto.id}">
                 <p class="checkIdMsg" id="idOk">사용 가능한 아이디입니다.</p>
                 <p class="checkIdMsg" id="idAlready">이미 사용중인 아이디입니다.</p>
-                <div id="idCheckMsg"></div>
                 <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="errorMsg"></p>
 
                 <label for="pw">*비밀번호</label>
@@ -68,10 +67,10 @@
                         $('#idOk').css("display","block");
                         $('#idAlready').css("display", "none");
                         idCheck = 1;
-                    } else { //입력 안한 아이디
+                    } else { //"", null 입력 안한 아이디
                         $('#idOk').css("display", "none");
                         $('#idAlready').css("display", "none");
-                        idCheck = 0;
+                        idCheck = 1;
                     }
                     return idCheck; //Ajax success 이후 값 받기
                 },
@@ -80,13 +79,16 @@
                 }
             })
         })
+
         $("#joinBtn").click(function() {
-            if(idCheck == 1) {
+            if(idCheck == 1) { //사용 가능한 아이디, 입력 안한 아이디 form submit
                 form.action = '/join';
                 form.method = 'POST';
                 form.submit();
             }
         })
+        var idF = $('#id')
+        idF.focus();
     })
 </script>
 

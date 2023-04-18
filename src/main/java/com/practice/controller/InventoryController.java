@@ -2,18 +2,15 @@ package com.practice.controller;
 
 import com.practice.auth.CustomUserDetails;
 import com.practice.domain.InventoryDTO;
-import com.practice.domain.MemberDTO;
 import com.practice.service.InventoryService;
 import com.practice.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +62,7 @@ public class InventoryController {
         inventoryService.insertInventory(dto);
     }
 
-    //재고수정페이지
+    //재고 상세페이지 & 수정페이지
     @PostMapping("/inventoryUpdate")
     public String inventoryUpdatePage(HttpServletRequest request, Model model) {
         int subjectNo = Integer.parseInt(request.getParameter("subjectNo"));
@@ -73,6 +70,8 @@ public class InventoryController {
         model.addAttribute("dto", dto);
         return "/inventory/inventoryUpdate";
     }
+
+    //
 
     //재고구매페이지
     @GetMapping("/inventoryShop")
