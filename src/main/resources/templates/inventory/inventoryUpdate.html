@@ -8,72 +8,83 @@
 <header th:replace="fragments/header :: header"></header>
 
 <script>
+  //재고 삭제하기
+  function deleteInventory(subjectNo) {
+    $.ajax({
+      type:"POST",
+      url:"/inventoryDeleteAjax",
+      data: {subjectNo:subjectNo},
+      success: function(data) {
+        alert("삭제되었습니다.");
+          location.replace("/inventoryList");
+		},
+	  error: function(data) {
+	    alert("재고 삭제에 실패하였습니다.");
+	  }
+	})
+  }
 
-function deleteBoard(subjectNo) {
-	$.ajax({
-			type:"POST",
-			url:"/boardDeleteAjax",
-			data: {subjectNo:subjectNo},
-			success: function(data) {
-				alert("삭제되었습니다.");
-				location.replace("/boardList");
-			},
-			error: function(data) {
-				alert("통신실패")
-			}
-		})
-}
+  //재고 수정하기 (수정 페이지를 만드는게 편할것같다..)
+  $(document).ready(function() {
+    $("#detailUpdateBtn").click(function() { //수정버튼 클릭하면
+	  var inventorySubject = document.getElementById("inventorySubject").value;
+	  var inventorySubjectNo = document.getElementById("inventorySubjectNo").value;
+	  var inventoryBuyer = document.getElementById("inventoryBuyer").value;
+	  var inventoryBuyDt = document.getElementById("inventoryBuyDt").value;
+	  var inventoryAmount = document.getElementById("inventoryAmount").value;
 
-$(document).ready(function() {
-	$("#detailUpdateBtn").click(function() {
-		var boardBuyer = document.getElementById("boardBuyer").value;
-		var boardBuyDt = document.getElementById("boardBuyDt").value;
-		var boardAmount = document.getElementById("boardAmount").value;
-		var boardSubjectNo = document.getElementById("boardsubjectNo").value;
-		console.log(boardBuyer + boardBuyDt + boardAmount + boardSubjectNo);
-		$("#boardUpdateArea").html(
-			"<textarea name='buyerArea' id='buyerArea'>"+boardBuyer+"</textarea>"
-			+"<textarea name='buyDtArea' id='buyDtArea'>"+boardBuyDt+"</textarea>"
-			+"<textarea name='buyerAmount' id='buyerAmount'>"+boardAmount+"</textarea>"
-			+"<button name='updateBtn'>수정하기</button>"
-			+"<div class='clear'>"
-			+"<button name='updateCancle'>수정취소</button>"
-			+"</div>");
+      $("#inventoryUpdateArea").html( //html 전체 수정
+        "<td><select name='subjectSelect' id='subjectSelect'><option value='none'>=선택=</option><option value='1'>컴퓨터</option><option value='2'>모니터</option><option value='3'>키보드</option><option value='4'>마우스</option><option value='5'>VGA</option><option value='6'>스피커</option></select></td>"
+        +"<td><input type='hidden' name='inventorySubjectNo' id='inventorySubjectNo'>"+inventorySubjectNo+"</td>"
+        +"<td><input type='text' name='buyerArea' id='buyerArea'></td>"
+        +"<td><input type='date' name='buyDtArea' id='buyDtArea'></td>"
+		+"<td><input type='text' name='AmountArea' id='AmountArea'></td>");
+		$("#subjectSelect").val(inventorySubject); //$().html input value 값을 이렇게 넣어줘야한다.
+		$("#buyerArea").val(inventoryBuyer);
+		$("#buyDtArea").val(inventoryBuyDt);
+		$("#AmountArea").val(inventoryAmount);
 
-			$("button[name='updateBtn']").click(function() {
-				var buyerArea = document.getElementById("buyerArea").value;
-				var buyDtArea = document.getElementById("buyDtArea").value;
-				var amountArea = document.getElementById("buyerAmount").value;
-				console.log(buyerArea + buyDtArea + amountArea);
+      $("#detailBtnBox").html(
+        "<input type='button' value='수정' id='updateBtn'>"
+        +"<input type='button' value='수정취소' id='updateCancel'>");
 
-				 $.ajax({
-					type:"POST",
-					url:"/boardUpdateAjax",
-					data: {buyDt:buyDtArea, buyer:buyerArea, amount:amountArea, subjectNo:boardSubjectNo},
-					success: function(data) {
-						location.reload();
-					},
-					error: function(data) {
-					alert("통신실패");
-				}
-			})
-			});
+      $("#subjectSelect").focus(); //선택상자 focus()
 
-			$("button[name='updateCancle']").click(function(){
-				location.reload();
-		});
-		});
+    $("#updateBtn").click(function() { //수정버튼 누른 상태에서 내용 수정하고 버튼 클릭하면
+      var subjectArea = $("#subjectSelect option:selected").val();
+      var buyerArea = document.getElementById("buyerArea").value;
+	  var buyDtArea = document.getElementById("buyDtArea").value;
+	  var amountArea = document.getElementById("AmountArea").value;
 
-	$("#backBtn").click(function() {
-		location.href = "/inventoryList";
-	});
-});
+	    $.ajax({
+	      type:"POST",
+		  url:"/inventoryUpdateAjax",
+		  data: {subject:subjectArea, buyDt:buyDtArea, buyer:buyerArea, amount:amountArea, subjectNo:inventorySubjectNo},
+		  success: function(data) {
+		    alert("수정되었습니다.");
+			location.reload(); //새로고침
+		  },
+		  error: function(data) {
+			alert("재고 수정에 실패하였습니다.");
+		  }
+		  })
+	  });
+
+        $("#updateCancel").click(function(){ //수정취소버튼 클릭하면
+          location.reload();
+        });
+    });
+
+        $("#backBtn").click(function() { //뒤로가기 버튼 클릭하면
+	      location.href = "/inventoryList";
+	    });
+  });
 
 </script>
 <body>
 
 <div class="wrapper">
-  <div id="boardDetail">
+  <div id="inventoryDetail">
     <h1>재고조회</h1>
 
     <table>
@@ -84,20 +95,25 @@ $(document).ready(function() {
         <th>구매일</th>
         <th>구매금액</th>
       </tr>
-      <tr>
-        <div id="boardUpdateArea">
-          <td><input type="hidden" th:text="${dto.subject}" th:value="${dto.subject}" id="boardSubject"></td>
-          <td><input type="hidden" th:text="${dto.subjectNo}" th:value="${dto.subjectNo}" id="boardsubjectNo"></td>
-          <td><input type="hidden" th:text="${dto.buyer}" th:value="${dto.buyer}" id="boardBuyer"></td>
-          <td><input type="hidden" th:text="${dto.buyDt}" th:value="${dto.buyDt}" id="boardBuyDt"></td>
-          <td><input type="hidden" th:text="${dto.amount}" th:value="${dto.amount}" id="boardAmount"></td>
-        </div>
+      <tr id="inventoryUpdateArea">
+        <td th:switch="${dto.subject}"><input type="hidden" th:value="${dto.subject}" id="inventorySubject">
+          <span th:case="1">컴퓨터</span>
+          <span th:case="2">모니터</span>
+          <span th:case="3">키보드</span>
+          <span th:case="4">마우스</span>
+          <span th:case="5">VGA</span>
+          <span th:case="6">스피커</span>
+        </td>
+        <td><input type="hidden" th:text="${dto.subjectNo}" th:value="${dto.subjectNo}" id="inventorySubjectNo"></td>
+        <td><input type="hidden" th:text="${dto.buyer}" th:value="${dto.buyer}" id="inventoryBuyer"></td>
+        <td><input type="hidden" th:text="${dto.buyDt}" th:value="${dto.buyDt}" id="inventoryBuyDt"></td>
+        <td><input type="hidden" th:text="${dto.amount}" th:value="${dto.amount}" id="inventoryAmount"></td>
       </tr>
     </table>
 
     <div id="detailBtnBox">
       <input type="button" value="수정" id="detailUpdateBtn">
-      <input type="button" value="삭제" id="detaildeletdBtn" th:onclick="deleteBoard([[ ${dto.subjectNo} ]])">
+      <input type="button" value="삭제" id="detailDeleteBtn" th:onclick="deleteInventory([[ ${dto.subjectNo} ]])">
       <input type="button" value="뒤로" id="backBtn">
     </div>
   </div>

@@ -8,11 +8,11 @@
 }
 
 .wrapper {
-  min-height: calc(100vh - 5rem);
+  min-height: calc(100vh - 5rem); /* footer 바닥에 고정시키기 */
   background: #F9F7F7;
 }
 
-.boardList	{ display: table; }
+.inventoryList	{ display: table; }
 .divTableHeading { display: table-header-group;}
 .divTableBody { display: table-row-group;}
 .divTableRow { display: table-row; }
@@ -25,7 +25,7 @@ h1 {
 	color: #112D4E;
 }
 
-.boardList {
+.inventoryList {
 	margin: 0 auto;
 	width: 100%;
 	max-width: 1000px;
@@ -33,7 +33,6 @@ h1 {
 }
 
 .divTableHeading {
-	background: #FFF;
 }
 
 .divTableHead {
@@ -42,12 +41,14 @@ h1 {
 	border: 1px solid #D2D2D2;
 	border-top: 2px solid #112D4E;
 	text-align: center;
+	background: #FFF;
 }
 
 .divTableCell {
 	padding: 10px 10px;
 	width: 180px;
 	border: 1px solid #D2D2D2;
+	text-align: center;
 	background: #FFF;
 }
 

@@ -14,4 +14,10 @@ public interface InventoryService {
 
     //재고 등록하기
     int insertInventory(InventoryDTO dto);
+
+    //재고 삭제하기
+    int deleteInventory(int subjectNo);
+
+    //재고 수정하기
+    int updateInventory(InventoryDTO dto);
 }

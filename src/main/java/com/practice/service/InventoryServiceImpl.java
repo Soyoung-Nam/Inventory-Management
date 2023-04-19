@@ -30,4 +30,16 @@ public class InventoryServiceImpl implements InventoryService {
     public int insertInventory(InventoryDTO dto) {
         return inventoryMapper.insertInventory(dto);
     }
+
+    //재고 삭제하기
+    @Override
+    public int deleteInventory(int subjectNo) {
+        return inventoryMapper.deleteInventory(subjectNo);
+    }
+
+    //재고 수정하기
+    @Override
+    public int updateInventory(InventoryDTO dto) {
+        return inventoryMapper.updateInventory(dto);
+    }
 }

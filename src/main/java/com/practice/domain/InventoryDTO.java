@@ -27,7 +27,7 @@ public class InventoryDTO {
     private String buyDt;
 
     /* 가격 */
-    private int amount;
+    private String amount;
 
     /* 작성날짜 */
     private Date createDt;
@@ -78,11 +78,11 @@ public class InventoryDTO {
         this.buyDt = buyDt;
     }
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 

@@ -12,13 +12,6 @@
     background: #F9F7F7;
 }
 
-#boardDetail {
-    margin: 0 auto;
-	padding: 0;
-	width: 600px;
-	height: 600px;
-}
-
 h1 {
 	text-align: center;
     color: #112D4E;
@@ -26,11 +19,18 @@ h1 {
     margin-bottom: 10px;
 }
 
+#inventoryDetail {
+    margin: 0 auto;
+	padding: 0;
+	width: 600px;
+	height: 600px;
+}
+
 table {
 	margin: 0 auto;
 	padding: 0;
 	width: 500px;
-	height: 300px;
+	height: 230px;
 	border: 1px solid #D2D2D2;
     border-top: 2px solid #112D4E;
     border-collapse: collapse;
@@ -49,4 +49,60 @@ tr {
 
 #detailBtnBox {
 	text-align: center;
+	margin-top: 15px;
+}
+
+#detailUpdateBtn {
+    padding: 15px 30px;
+    margin-right: 5px;
+    background: #DBE2EF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#detailDeleteBtn {
+    padding: 15px 30px;
+    margin-right: 5px;
+    background: #DBE2EF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#backBtn {
+    padding: 15px 30px;
+    margin-right: 5px;
+    background: #DBE2EF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#updateBtn {
+    padding: 15px 30px;
+    margin-right: 5px;
+    background: #DBE2EF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#updateCancel {
+    padding: 15px 30px;
+    margin-right: 5px;
+    background: #DBE2EF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#subjectSelect {
+    text-align: center;
+}
+
+#buyerArea {
+    text-align: center;
+}
+
+#buyDtArea {
+    text-align: center;
+}
+
+#AmountArea {
+    text-align: center;
 }

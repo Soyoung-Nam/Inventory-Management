@@ -12,14 +12,6 @@
     background: #F9F7F7;
 }
 
-#boardWrite {
-    margin: 0 auto;
-	padding: 0;
-	padding-top: 20px;
-	width: 600px;
-	height: 600px;
-}
-
 h1 {
     text-align: center;
     color: #112D4E;
@@ -27,11 +19,19 @@ h1 {
     margin-bottom: 10px;
 }
 
+#inventoryWrite {
+    margin: 0 auto;
+	padding: 0;
+	padding-top: 20px;
+	width: 600px;
+	height: 600px;
+}
+
 table {
     margin: 0 auto;
 	padding: 0;
 	width: 500px;
-	height: 350px;
+	height: 300px;
 	border: 1px solid #D2D2D2;
 	border-top: 2px solid #112D4E;
 	border-collapse: collapse;

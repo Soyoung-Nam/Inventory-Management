@@ -39,20 +39,27 @@ public class MemberController {
     //회원가입 Action
     @PostMapping("/join")
     public String joinAction(@ModelAttribute("member") @Valid MemberDTO memberDTO, BindingResult bindingResult, HttpServletRequest request, Model model) {
+        int idCkRs = Integer.parseInt(request.getParameter("idCk"));
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("dto", memberDTO);
+            model.addAttribute("idCkRs", idCkRs);
             return "/login/join";
         } else {
-            memberService.insertMember(memberDTO);
-            return "/login/login";
+            if(idCkRs == 2) {
+                memberService.insertMember(memberDTO);
+                return "/login/login";
+            } else {
+                model.addAttribute("idCkRs", idCkRs);
+                return "/login/join";
+            }
         }
     }
 
     //회원가입 아이디 중복체크 Ajax
     @PostMapping("/idCheckAjax")
     @ResponseBody
-    public int idCheckAction(HttpServletRequest request) {
+    public int idCheckAction(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
 
         if(id == "" || id == null) {

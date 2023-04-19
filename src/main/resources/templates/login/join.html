@@ -18,6 +18,7 @@
                 <p class="checkIdMsg" id="idOk">사용 가능한 아이디입니다.</p>
                 <p class="checkIdMsg" id="idAlready">이미 사용중인 아이디입니다.</p>
                 <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="errorMsg"></p>
+                <input type="hidden" id="idCkRs" th:value="${idCkRs}"> <!-- idCk 값 담는 input -->
 
                 <label for="pw">*비밀번호</label>
                 <input type="password" th:field="*{pw}" id="pw" th:value="#{dto.pw}">
@@ -40,14 +41,14 @@
                 <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="errorMsg"></p>
 
                 <input type="button" id="joinBtn" value="가입하기">
-                <a href="/login/login">뒤로가기</a>
+                <a href="/">뒤로가기</a>
             </form>
         </div>
     </div>
 </body>
 <script>
     $(document).ready(function() {
-        var idCheck = 0;
+        var idCk = 0;
         var form = document.getElementById("join-form");
 
         $("#id").blur(function() {
@@ -57,22 +58,22 @@
                 type: "POST",
                 url: "/idCheckAjax",
                 data: {id:id},
+                dataType: "text",
                 async: false, //동기식
                 success: function(data) {
                     if(data == 1) { //이미 사용중인 아이디
                         $('#idAlready').css("display","block");
                         $('#idOk').css("display", "none");
-                        idCheck = 0;
+                        idCk = 1;
                     } else if(data == 0) { //사용 가능한 아이디
                         $('#idOk').css("display","block");
                         $('#idAlready').css("display", "none");
-                        idCheck = 1;
-                    } else { //"", null 입력 안한 아이디
+                        idCk = 2;
+                    } else { //"", null 아이디
                         $('#idOk').css("display", "none");
                         $('#idAlready').css("display", "none");
-                        idCheck = 1;
+                        idCk = 3;
                     }
-                    return idCheck; //Ajax success 이후 값 받기
                 },
                 error: function(data) {
                     alert("아이디 중복체크에 실패하였습니다.");
@@ -81,14 +82,35 @@
         })
 
         $("#joinBtn").click(function() {
-            if(idCheck == 1) { //사용 가능한 아이디, 입력 안한 아이디 form submit
-                form.action = '/join';
-                form.method = 'POST';
-                form.submit();
-            }
+            input = document.createElement('input');
+    	    input.setAttribute('type', 'hidden');
+    	    input.setAttribute('name', 'idCk');
+    	    input.setAttribute('value', idCk);
+    	    form.appendChild(input);
+
+    	    form.action = '/join';
+            form.method = 'POST';
+            form.submit();
         })
-        var idF = $('#id')
-        idF.focus();
+
+        var idCkRs = $('#idCkRs').val();
+        if(idCkRs == 1) {
+            $('#idAlready').css("display","block");
+            $('#idOk').css("display", "none");
+            $('#id').focus();
+            return false;
+        } else if(idCkRs == 2) {
+            $('#idOk').css("display","block");
+            $('#idAlready').css("display", "none");
+            $('#id').focus();
+        } else if(idCkRs == 3) {
+            $('#idOk').css("display", "none");
+            $('#idAlready').css("display", "none");
+            $('#id').focus();
+            return false;
+        } else {
+            $('#id').focus();
+        }
     })
 </script>
 

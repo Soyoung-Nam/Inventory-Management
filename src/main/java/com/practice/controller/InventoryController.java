@@ -51,7 +51,7 @@ public class InventoryController {
         int subject = Integer.parseInt(request.getParameter("subject"));
         String buyDt = request.getParameter("buyDt");
         String buyer = request.getParameter("buyer");
-        int amount = Integer.parseInt(request.getParameter("amount"));
+        String amount = request.getParameter("amount");
 
         InventoryDTO dto = new InventoryDTO();
         dto.setNo(no);
@@ -71,7 +71,33 @@ public class InventoryController {
         return "/inventory/inventoryUpdate";
     }
 
-    //
+    //재고 삭제하기
+    @PostMapping("/inventoryDeleteAjax")
+    @ResponseBody
+    public void inventoryDeleteAction(HttpServletRequest request, Model model) {
+        int subjectNo = Integer.parseInt(request.getParameter("subjectNo"));
+        inventoryService.deleteInventory(subjectNo);
+    }
+
+    //재고 수정하기
+    @PostMapping("/inventoryUpdateAjax")
+    @ResponseBody
+    public void inventoryUpdateAction(HttpServletRequest request, Model model) {
+        int subject = Integer.parseInt(request.getParameter("subject"));
+        int subjectNo = Integer.parseInt(request.getParameter("subjectNo"));
+        String buyDt = request.getParameter("buyDt");
+        String buyer = request.getParameter("buyer");
+        String amount = request.getParameter("amount");
+
+        InventoryDTO dto = new InventoryDTO();
+        dto.setSubject(subject);
+        dto.setSubjectNo(subjectNo);
+        dto.setBuyDt(buyDt);
+        dto.setBuyer(buyer);
+        dto.setAmount(amount);
+
+        inventoryService.updateInventory(dto);
+    }
 
     //재고구매페이지
     @GetMapping("/inventoryShop")

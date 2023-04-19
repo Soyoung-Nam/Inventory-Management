@@ -18,11 +18,18 @@
     <!-- 재고목록 가져오기 -->
     <select id="selectInventoryList" resultType="com.practice.domain.InventoryDTO">
         SELECT * FROM inventory
+        WHERE delFlag = 1;
     </select>
 
     <!-- 상세재고목록 가져오기 -->
     <select id="getInventoryListBySubjectNo" resultType="com.practice.domain.InventoryDTO">
-        SELECT * FROM inventory
+        SELECT
+        subjectNo,
+        subject,
+        buyer,
+        buyDt,
+        FORMAT(amount,0) AS amount
+        FROM inventory
         WHERE subjectNo = #{subjectNo}
     </select>
 
@@ -33,5 +40,23 @@
         VALUES
         (#{no}, #{subject}, #{buyer}, #{buyDt}, #{amount}, 1)
     </insert>
+    
+    <!-- 재고 삭제하기 -->
+    <delete id="deleteInventory">
+        UPDATE inventory
+        SET delFlag = 2
+        WHERE subjectNo = #{subjectNo}
+    </delete>
+
+    <!-- 재고 수정하기 -->
+    <update id="updateInventory">
+        UPDATE inventory
+        SET updateDt = NOW(),
+        subject = #{subject},
+        buyDt = #{buyDt},
+        buyer = #{buyer},
+        amount = #{amount}
+        WHERE subjectNo = #{subjectNo}
+    </update>
 
 </mapper>
