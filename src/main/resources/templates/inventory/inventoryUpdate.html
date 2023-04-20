@@ -48,7 +48,13 @@
         "<input type='button' value='수정' id='updateBtn'>"
         +"<input type='button' value='수정취소' id='updateCancel'>");
 
-      $("#subjectSelect").focus(); //선택상자 focus()
+      $("#buyerArea").click(function() {
+	      $(this).val("");
+	  });
+
+      $("#AmountArea").click(function() {
+	      $(this).val("");
+	  });
 
     $("#updateBtn").click(function() { //수정버튼 누른 상태에서 내용 수정하고 버튼 클릭하면
       var subjectArea = $("#subjectSelect option:selected").val();
@@ -56,6 +62,7 @@
 	  var buyDtArea = document.getElementById("buyDtArea").value;
 	  var amountArea = document.getElementById("AmountArea").value;
 
+      if(buyerArea != "" && amountArea != "") {
 	    $.ajax({
 	      type:"POST",
 		  url:"/inventoryUpdateAjax",
@@ -68,7 +75,11 @@
 			alert("재고 수정에 실패하였습니다.");
 		  }
 		  })
-	  });
+
+	  } else {
+	    alert("항목을 입력해주세요.");
+	  }
+	 });
 
         $("#updateCancel").click(function(){ //수정취소버튼 클릭하면
           location.reload();

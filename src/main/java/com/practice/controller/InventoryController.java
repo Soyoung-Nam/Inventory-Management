@@ -2,6 +2,8 @@ package com.practice.controller;
 
 import com.practice.auth.CustomUserDetails;
 import com.practice.domain.InventoryDTO;
+import com.practice.domain.PagingResponse;
+import com.practice.domain.SearchDTO;
 import com.practice.service.InventoryService;
 import com.practice.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,9 +30,9 @@ public class InventoryController {
 
     //재고목록페이지
     @GetMapping("/inventoryList")
-    public String inventoryListPage(Model model) {
-        List<InventoryDTO> list = inventoryService.selectInventoryList();
-        model.addAttribute("list", list);
+    public String inventoryListPage(@ModelAttribute("dto") SearchDTO dto, Model model) { //SearchDTO값을 dto이름으로 담는다.
+        PagingResponse<InventoryDTO> response = inventoryService.selectInventoryList(dto);
+        model.addAttribute("response", response);
         return "/inventory/inventoryList";
     }
 

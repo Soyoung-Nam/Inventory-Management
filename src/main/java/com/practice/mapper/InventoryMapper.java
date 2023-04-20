@@ -1,15 +1,22 @@
 package com.practice.mapper;
 
 import com.practice.domain.InventoryDTO;
+import com.practice.domain.Pagination;
+import com.practice.domain.PagingResponse;
+import com.practice.domain.SearchDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface InventoryMapper {
 
     //재고목록 가져오기
-    List<InventoryDTO> selectInventoryList();
+    List<InventoryDTO> selectInventoryList(SearchDTO dto);
+
+    //게시글 COUNT(페이징)
+    int inventoryCount();
 
     //상세재고목록 가져오기
     InventoryDTO getInventoryListBySubjectNo(int subjectNo);

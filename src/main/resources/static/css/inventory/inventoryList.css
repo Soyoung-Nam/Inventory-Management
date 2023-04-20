@@ -57,7 +57,7 @@ h1 {
 }
 
 #listInsertBtn {
-	margin-top: 20px;
+	margin: 35px 0px;
 	padding: 15px 30px;
     background: #DBE2EF;
     border-radius: 5px;
@@ -66,4 +66,32 @@ h1 {
 
 #tableList:hover {
 	cursor: pointer;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.pagination > li {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.pagination > li > a {
+    width: 20px;
+    padding: 7px;
+	margin-right: 5px;
+	border: 1px solid #D2D2D2;
+	text-align: center;
+	text-decoration: none;
+}
+
+.pagination > li > a:hover, .pagination > li > a:focus {
+	border:1px solid #112D4E;
+	background-color: #112D4E;
+	color: #FFF;
 }

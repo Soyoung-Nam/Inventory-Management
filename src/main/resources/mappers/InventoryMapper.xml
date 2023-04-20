@@ -16,9 +16,19 @@
     </sql>
 
     <!-- 재고목록 가져오기 -->
-    <select id="selectInventoryList" resultType="com.practice.domain.InventoryDTO">
+    <!-- MyBatis에서 쿼리의 parameterType이 클래스의 객체인 경우 XML Mapper의 #{parameter}는 멤버 변수의 getter에 해당된다. -->
+    <!-- get() 메소드를 이용해서 쿼리에 파라미터를 바인딩하는 개념이다. -->
+    <select id="selectInventoryList" parameterType="com.practice.domain.SearchDTO" resultType="com.practice.domain.InventoryDTO">
         SELECT * FROM inventory
-        WHERE delFlag = 1;
+        WHERE delFlag = 1
+        ORDER BY subjectNo DESC
+        LIMIT #{pagination.limitStart}, #{recordSize}
+    </select>
+
+    <!-- 재고목록 count(페이징) -->
+    <select id="inventoryCount" resultType="int">
+        SELECT count(*) FROM inventory
+        WHERE delFlag = 1
     </select>
 
     <!-- 상세재고목록 가져오기 -->

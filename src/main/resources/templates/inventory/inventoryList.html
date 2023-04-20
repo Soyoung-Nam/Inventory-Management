@@ -31,6 +31,7 @@
 			location.href = "/inventoryWrite";
 		});
 	});
+
 </script>
 
 <body>
@@ -54,7 +55,7 @@
 
         <div class="divTableBody">
             <div class="divTableRow">
-                <div id="tableList" th:each="l : ${list}" th:onclick="'javascript:pageMove('+ ${l.subjectNo} + ');'">
+                <div id="tableList" th:each="l : ${response.list}" th:onclick="'javascript:pageMove('+ ${l.subjectNo} + ');'">
                     <div class="divTableCell" th:text="${l.subjectNo}"></div>
                     <div class="divTableCell" th:switch="${l.subject}">
                         <span th:case="1">컴퓨터</span>
@@ -71,6 +72,28 @@
             </div>
         </div>
 
+        <nav th:each="p : ${response.pagination}">
+            <ul class="pagination" th:with="start=${p.startPage},end=${p.endPage}">
+                <li th:if="${p.existPrevPage}">
+                    <a th:href="@{/inventoryList(page=1)}" th:text="'<<'"></a>
+                </li>
+                <li th:if="${p.existPrevPage}">
+                    <a th:href="@{/inventoryList(page=${dto.page-1})}" th:text="'<'"></a>
+                </li>
+
+                <li th:each="page: ${#numbers.sequence(start, end)}">
+                    <a th:text="${page}" th:href="@{/inventoryList(page=${page})}"></a>
+                </li>
+
+                <li th:if="${p.existNextPage}">
+                    <a th:href="@{/inventoryList(page=${dto.page+1})}" th:text="'>'"></a>
+                </li>
+                <li th:if="${p.existNextPage}">
+                    <a th:href="@{/inventoryList(page=${p.totalPageCount})}" th:text="'>>'"></a>
+                </li>
+            </ul>
+        </nav>
+
         <div id="listBtnBox">
             <input type="button" value="등록하기" id="listInsertBtn">
         </div>
@@ -78,6 +101,5 @@
 </div>
 
 <footer th:replace="fragments/footer :: footer"></footer>
-
 </body>
 </html>
