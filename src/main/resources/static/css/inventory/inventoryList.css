@@ -21,7 +21,6 @@
 h1 {
 	text-align: center;
 	padding: 10px;
-	margin-bottom: 20px;
 	color: #112D4E;
 }
 
@@ -94,4 +93,39 @@ nav {
 	border:1px solid #112D4E;
 	background-color: #112D4E;
 	color: #FFF;
+}
+
+.search_box {
+    margin: 0 auto;
+	width: 100%;
+	max-width: 1000px;
+}
+
+.search_content {
+    float: right;
+    padding: 7px;
+    margin-bottom: 10px;
+}
+
+.search_content > select {
+    padding: 4px;
+    margin-right: 3px;
+}
+
+.search_content > input[type="text"] {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.search_content > input[type="button"] {
+    padding: 5px 15px;
+}
+
+#noTableList {
+    margin: 100px 0px;
+}
+
+#noTableList > p {
+    text-align: center;
+    text-size: 14px;
 }

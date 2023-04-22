@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 public class InventoryController {
@@ -30,7 +29,35 @@ public class InventoryController {
 
     //재고목록페이지
     @GetMapping("/inventoryList")
-    public String inventoryListPage(@ModelAttribute("dto") SearchDTO dto, Model model) { //SearchDTO값을 dto이름으로 담는다.
+    public String inventoryListPage(@ModelAttribute("dto") SearchDTO dto, Model model, HttpServletRequest request) { //SearchDTO값을 dto이름으로 담는다.
+        String keyword = request.getParameter("keyword");
+        String result;
+
+        if(keyword != "" && keyword != null) { //switch문 사용할때 null값 예외가 필요하다.
+            switch (keyword) {
+                case "컴퓨터":
+                    result = "1";
+                    break;
+                case "모니터":
+                    result = "2";
+                    break;
+                case "키보드":
+                    result = "3";
+                    break;
+                case "마우스":
+                    result = "4";
+                    break;
+                case "VGA":
+                    result = "5";
+                    break;
+                case "스피커":
+                    result = "6";
+                    break;
+                default:
+                    result = keyword;
+            }
+            dto.setKeyword(result);
+        }
         PagingResponse<InventoryDTO> response = inventoryService.selectInventoryList(dto);
         model.addAttribute("response", response);
         return "/inventory/inventoryList";
@@ -51,7 +78,7 @@ public class InventoryController {
         CustomUserDetails customUserDetails = memberService.getMemberById(id);
         int no = customUserDetails.getNo();
 
-        int subject = Integer.parseInt(request.getParameter("subject"));
+        String subject = request.getParameter("subject");
         String buyDt = request.getParameter("buyDt");
         String buyer = request.getParameter("buyer");
         String amount = request.getParameter("amount");
@@ -86,7 +113,7 @@ public class InventoryController {
     @PostMapping("/inventoryUpdateAjax")
     @ResponseBody
     public void inventoryUpdateAction(HttpServletRequest request, Model model) {
-        int subject = Integer.parseInt(request.getParameter("subject"));
+        String subject = request.getParameter("subject");
         int subjectNo = Integer.parseInt(request.getParameter("subjectNo"));
         String buyDt = request.getParameter("buyDt");
         String buyer = request.getParameter("buyer");

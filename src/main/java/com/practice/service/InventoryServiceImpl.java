@@ -16,16 +16,12 @@ public class InventoryServiceImpl implements InventoryService {
     //재고목록 가져오기
     @Override
     public PagingResponse<InventoryDTO> selectInventoryList(SearchDTO dto) {
-        int count = inventoryMapper.inventoryCount();
-        if(count < 1) {
-            return new PagingResponse<>(Collections.emptyList(), null);
-        }
+        int count = inventoryMapper.inventoryCount(dto);
 
         Pagination pagination = new Pagination(count, dto);
         dto.setPagination(pagination);
 
         List<InventoryDTO> list = inventoryMapper.selectInventoryList(dto);
-
         return new PagingResponse<>(list, pagination);
     }
 

@@ -15,20 +15,50 @@
         delFlag
     </sql>
 
+    <!-- 게시글 검색 -->
+    <sql id="search">
+    <!-- 검색 키워드가 있을 때 -->
+    <if test="keyword != null and keyword != ''">
+        <choose>
+            <!-- 검색 유형이 있을 때 -->
+            <when test="searchType != null and searchType != ''">
+                <choose>
+                    <when test="'subject'.equals(searchType)">
+                        AND subject LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+                    <when test="'buyer'.equals(searchType)">
+                        AND buyer LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+                </choose>
+            </when>
+
+            <!-- 전체 검색일 때 -->
+            <otherwise>
+                AND (
+                subject LIKE CONCAT('%', #{keyword}, '%')
+                OR buyer LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </otherwise>
+        </choose>
+    </if>
+    </sql>
+
     <!-- 재고목록 가져오기 -->
     <!-- MyBatis에서 쿼리의 parameterType이 클래스의 객체인 경우 XML Mapper의 #{parameter}는 멤버 변수의 getter에 해당된다. -->
     <!-- get() 메소드를 이용해서 쿼리에 파라미터를 바인딩하는 개념이다. -->
     <select id="selectInventoryList" parameterType="com.practice.domain.SearchDTO" resultType="com.practice.domain.InventoryDTO">
         SELECT * FROM inventory
         WHERE delFlag = 1
+        <include refid="search" />
         ORDER BY subjectNo DESC
         LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
 
     <!-- 재고목록 count(페이징) -->
-    <select id="inventoryCount" resultType="int">
+    <select id="inventoryCount" parameterType="com.practice.domain.SearchDTO" resultType="int">
         SELECT count(*) FROM inventory
         WHERE delFlag = 1
+        <include refid="search" />
     </select>
 
     <!-- 상세재고목록 가져오기 -->

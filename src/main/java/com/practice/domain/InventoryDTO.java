@@ -17,7 +17,7 @@ public class InventoryDTO {
     private int subjectNo;
 
     /* 품목 */
-    private int subject;
+    private String subject;
 
     /* 구매자 */
     private String buyer;
@@ -54,11 +54,11 @@ public class InventoryDTO {
         this.subjectNo = subjectNo;
     }
 
-    public int getSubject() {
+    public String getSubject() {
         return subject;
     }
 
-    public void setSubject(int subject) {
+    public void setSubject(String subject) {
         this.subject = subject;
     }
 

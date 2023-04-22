@@ -16,7 +16,7 @@ public interface InventoryMapper {
     List<InventoryDTO> selectInventoryList(SearchDTO dto);
 
     //게시글 COUNT(페이징)
-    int inventoryCount();
+    int inventoryCount(SearchDTO dto);
 
     //상세재고목록 가져오기
     InventoryDTO getInventoryListBySubjectNo(int subjectNo);
