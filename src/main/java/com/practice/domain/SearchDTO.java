@@ -2,6 +2,11 @@ package com.practice.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 @Getter
 @Setter

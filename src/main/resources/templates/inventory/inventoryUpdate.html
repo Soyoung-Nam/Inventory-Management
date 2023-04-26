@@ -10,13 +10,14 @@
 <script>
   //재고 삭제하기
   function deleteInventory(subjectNo) {
+    var queryString = (location.search) ? location.search + "" : "";
     $.ajax({
       type:"POST",
       url:"/inventoryDeleteAjax",
       data: {subjectNo:subjectNo},
       success: function(data) {
-        alert("삭제되었습니다.");
-          location.replace("/inventoryList");
+        alert(subjectNo + "번 재고가 삭제되었습니다.");
+          location.replace("/inventoryList" + queryString);
 		},
 	  error: function(data) {
 	    alert("재고 삭제에 실패하였습니다.");
@@ -34,7 +35,7 @@
 	  var inventoryAmount = document.getElementById("inventoryAmount").value;
 
       $("#inventoryUpdateArea").html( //html 전체 수정
-        "<td><select name='subjectSelect' id='subjectSelect'><option value='none'>=선택=</option><option value='1'>컴퓨터</option><option value='2'>모니터</option><option value='3'>키보드</option><option value='4'>마우스</option><option value='5'>VGA</option><option value='6'>스피커</option></select></td>"
+        "<td><select name='subjectSelect' id='subjectSelect'><option value='none'>=선택=</option><option value='컴퓨터'>컴퓨터</option><option value='모니터'>모니터</option><option value='키보드'>키보드</option><option value='마우스'>마우스</option><option value='VGA'>VGA</option><option value='스피커'>스피커</option></select></td>"
         +"<td><input type='hidden' name='inventorySubjectNo' id='inventorySubjectNo'>"+inventorySubjectNo+"</td>"
         +"<td><input type='text' name='buyerArea' id='buyerArea'></td>"
         +"<td><input type='date' name='buyDtArea' id='buyDtArea'></td>"
@@ -87,7 +88,7 @@
     });
 
         $("#backBtn").click(function() { //뒤로가기 버튼 클릭하면
-	      location.href = "/inventoryList";
+	      location.href = "/inventoryList" + location.search;
 	    });
   });
 
@@ -107,14 +108,7 @@
         <th>구매금액</th>
       </tr>
       <tr id="inventoryUpdateArea">
-        <td th:switch="${dto.subject}"><input type="hidden" th:value="${dto.subject}" id="inventorySubject">
-          <span th:case="1">컴퓨터</span>
-          <span th:case="2">모니터</span>
-          <span th:case="3">키보드</span>
-          <span th:case="4">마우스</span>
-          <span th:case="5">VGA</span>
-          <span th:case="6">스피커</span>
-        </td>
+        <td><input type="hidden" th:text="${dto.subject}" th:value="${dto.subject}" id="inventorySubject"></td>
         <td><input type="hidden" th:text="${dto.subjectNo}" th:value="${dto.subjectNo}" id="inventorySubjectNo"></td>
         <td><input type="hidden" th:text="${dto.buyer}" th:value="${dto.buyer}" id="inventoryBuyer"></td>
         <td><input type="hidden" th:text="${dto.buyDt}" th:value="${dto.buyDt}" id="inventoryBuyDt"></td>

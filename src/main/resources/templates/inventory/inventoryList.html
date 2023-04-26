@@ -8,9 +8,10 @@
 <header th:replace="fragments/header :: header"></header>
 
 <script>
-	function pageMove(subjectNo) {
-	    //subjectNo를 post방식으로 보내기 위해서
-	    console.log(subjectNo);
+    //subjectNo를 post방식으로 보내기 위해서
+	function detailMove(subjectNo) {
+	    var queryString = (location.search) ? location.search + "" : ""; //페이징 + 검색 유지
+
     	var frm = document.createElement('form');
     	var input;
     	input = document.createElement('input');
@@ -20,12 +21,13 @@
 
     	frm.appendChild(input);
     	frm.setAttribute('method', 'post');
-    	frm.setAttribute('action', '/inventoryUpdate');
+    	frm.setAttribute('action', '/inventoryUpdate' + queryString);
     	document.body.appendChild(frm);
     	frm.submit();
 	}
 
 	$(document).ready(function() {
+
 		//재고등록페이지로 이동
 		$("#listInsertBtn").click(function() {
 			location.href = "/inventoryWrite";
@@ -40,16 +42,18 @@
 		}
 	});
 
-	function searchInventory(page) {
+	function movePage(page) {
+	    console.log(page);
 	    var form = document.getElementById('searchForm');
 
 	    var queryParams = {
-	        page: 1, //1페이지에서 검색이 되어야한다.
+	        page: (page) ? page : 1, //1페이지에서 검색이 되어야한다.
 	        recordSize: 10,
             pageSize: 10,
-	        searchType: form.searchType.value,
-	        keyword: form.keyword.value
+            searchType: form.searchType.value,
+            keyword: form.keyword.value
 	    }
+
 	    location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
 	}
 
@@ -64,13 +68,13 @@
     <div class="search_box">
         <form id="searchForm">
             <div class="search_content">
-                <select id="searchType" name="searchType">
-                    <option value="">전체검색</option>
-                    <option value="subject">품목</option>
-                    <option value="buyer">구매자</option>
+                <select id="searchType" name="searchType" th:value="${dto.searchType}">
+                    <option value="" th:selected="${dto.searchType} == ''">전체검색</option>
+                    <option value="subject" th:selected="${dto.searchType} == 'subject'">품목</option>
+                    <option value="buyer" th:selected="${dto.searchType} == 'buyer'">구매자</option>
                 </select>
-                <input type="text" name="keyword" id="keyword" placeholder="키워드를 입력해주세요."/>
-                <input type="button" id="searchBtn" th:onclick="'javascript:searchInventory('+ ${dto.page} + ');'" value="검색">
+                <input type="text" name="keyword" id="keyword" th:value="${dto.keyword}" placeholder="키워드를 입력해주세요."/>
+                <input type="button" id="searchBtn" th:onclick="movePage(1);" value="검색">
             </div>
         </form>
     </div>
@@ -90,16 +94,9 @@
 
         <div class="divTableBody">
             <div class="divTableRow">
-                <div id="tableList" th:each="l : ${response.list}" th:onclick="'javascript:pageMove('+ ${l.subjectNo} + ');'">
+                <div id="tableList" th:each="l : ${response.list}" th:onclick="'javascript:detailMove('+ ${l.subjectNo} + ');'">
                     <div class="divTableCell" th:text="${l.subjectNo}"></div>
-                    <div class="divTableCell" th:switch="${l.subject}">
-                        <span th:case="1">컴퓨터</span>
-                        <span th:case="2">모니터</span>
-                        <span th:case="3">키보드</span>
-                        <span th:case="4">마우스</span>
-                        <span th:case="5">VGA</span>
-                        <span th:case="6">스피커</span>
-                    </div>
+                    <div class="divTableCell" th:text="${l.subject}"></div>
                     <div class="divTableCell" th:text="${l.buyDt}"></div>
                     <div class="divTableCell" th:text="${l.buyer}"></div>
                     <div class="divTableCell" th:text="${l.createDt}"></div>
@@ -112,21 +109,21 @@
         <nav th:each="p : ${response.pagination}">
             <ul class="pagination" th:with="start=${p.startPage},end=${p.endPage}">
                 <li th:if="${p.existPrevPage}">
-                    <a th:href="@{/inventoryList(page=1)}" th:text="'<<'"></a>
+                    <a href="javascript:void(0);" th:onclick="movePage(1)" th:text="'<<'"></a>
                 </li>
                 <li th:if="${p.existPrevPage}">
-                    <a th:href="@{/inventoryList(page=${dto.page-1})}" th:text="'<'"></a>
+                    <a href="javascript:void(0);" th:onclick="'javascript:movePage('+ ${dto.page - 1} +');'" th:text="'<'"></a>
                 </li>
 
                 <li th:each="page: ${#numbers.sequence(start, end)}">
-                    <a th:text="${page}" th:href="@{/inventoryList(page=${page})}"></a>
+                    <a href="javascript:void(0);" th:text="${page}" th:onclick="'javascript:movePage('+ ${page} +');'"></a>
                 </li>
 
                 <li th:if="${p.existNextPage}">
-                    <a th:href="@{/inventoryList(page=${dto.page+1})}" th:text="'>'"></a>
+                    <a href="javascript:void(0);" th:onclick="'javascript:movePage(' + ${dto.page + 1} + ');'" th:text="'>'"></a>
                 </li>
                 <li th:if="${p.existNextPage}">
-                    <a th:href="@{/inventoryList(page=${p.totalPageCount})}" th:text="'>>'"></a>
+                    <a href="javascript:void(0);" th:onclick="'javascript:movePage(' + ${p.totalPageCount} + ');'" th:text="'>>'"></a>
                 </li>
             </ul>
         </nav>
