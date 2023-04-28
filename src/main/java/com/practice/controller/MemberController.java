@@ -76,6 +76,15 @@ public class MemberController {
         return "/login/findId";
     }
 
+    //아이디찾기 AJAX
+    @PostMapping("/emailCheckAjax")
+    @ResponseBody
+    public int emailCheckAjax(HttpServletRequest request) {
+        String email = request.getParameter("email");
+        int result = memberService.emailCheck(email);
+        return result;
+    }
+
     //비밀번호찾기 페이지
     @GetMapping("/findPw")
     public String findPwPage() {

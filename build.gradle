@@ -20,6 +20,7 @@ dependencies {
 	implementation 'org.projectlombok:lombok' //lombok @getter @setter
 	implementation 'org.springframework.boot:spring-boot-starter-security' //시큐리티
 	implementation 'org.springframework.boot:spring-boot-starter-validation' //유효성 검사
+	implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.1' //이메일
 	developmentOnly 'org.springframework.boot:spring-boot-devtools' //서버 끄지 않고 변경 사항 반영
 	testImplementation 'org.springframework.boot:spring-boot-starter-test' //test
 }

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service //데이터 비즈니스 로직, 구현체
 public class MemberServiceImpl implements MemberService {
 
@@ -20,6 +18,11 @@ public class MemberServiceImpl implements MemberService {
 
     public CustomUserDetails getMemberById(String id) {
         return memberMapper.getMemberById(id);
+    }
+
+    @Override
+    public String getIdByEmail(String email) {
+        return memberMapper.getIdByEmail(email);
     }
 
     //회원가입
@@ -35,5 +38,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int idCheck(String id) {
         return memberMapper.idCheck(id);
+    }
+
+    //회원가입 이메일 존재여부
+    @Override
+    public int emailCheck(String email) {
+        return memberMapper.emailCheck(email);
     }
 }

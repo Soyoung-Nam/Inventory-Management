@@ -5,9 +5,61 @@
     <title>findId</title>
     <link th:href="@{/css/login/findId.css}" rel="stylesheet" />
 </head>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <body>
-
-    <p>아이디찾기 페이지입니다.</p>
-
+    <div class="wrapper">
+        <div class="findId-wrapper">
+            <form id="findId-form">
+                <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요.">
+                <p class="checkEmailMsg" id="emptyEmail">이메일을 입력해주세요.</p>
+                <p class="checkEmailMsg" id="noEmail">존재하지 않는 이메일입니다.</p>
+                <input type="button" name="findIdBtn" id="findIdBtn" value="아이디찾기">
+            </form>
+            <a href="/">뒤로가기</a>
+        </div>
+    </div>
 </body>
+    <script>
+        $(document).ready(function() {
+            var emailCk = 0;
+            var form = document.getElementById("findId-form");
+
+            $("#findIdBtn").click(function() {
+                var email = $('#email').val();
+
+                if(email != "" && email != null) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/emailCheckAjax",
+                        data: {email:email},
+                        async: false,
+                        success: function(data) {
+                            if(data == 1) { //존재하는 이메일
+                                $('#noEmail').css("display", "none");
+                                $('#emptyEmail').css("display","none");
+                                emailCk = 1;
+                            } else { //존재하지 않는 이메일
+                                $('#noEmail').css("display","block");
+                                $('#emptyEmail').css("display","none");
+                                emailCk = 0;
+                            }
+                        },
+                        error: function(data) {
+                            alert("이메일 존재여부체크에 실패하였습니다.");
+                        }
+                    })
+                } else {
+                    $('#emptyEmail').css("display","block");
+                    return false;
+                }
+
+                if(emailCk == 1) {
+                    //form.action = '/findIdMail';
+                    //form.method = 'POST';
+                    //form.submit();
+                    //alert("메일이 발송되었습니다. 메일함을 확인해주세요.");
+                }
+            })
+        })
+    </script>
 </html>
