@@ -1,1 +1,2 @@
-# Inventory-Management
+# 스프링부트 개인프로젝트
+재고관리프로그램
